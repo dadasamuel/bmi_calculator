@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 
 class ReusableCard extends StatelessWidget {
@@ -37,10 +38,7 @@ class IconContent extends StatelessWidget {
       const SizedBox(height: 15.0),
       Text(
         label,
-        style: const TextStyle(
-          fontSize: 18.0,
-          color: Color(0xFF8D8E98),
-        ),
+        style: labelTextStyle
       )
     ]);
   }

@@ -1,9 +1,7 @@
 import 'package:bmi_calculator/all_class.dart';
+import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-const activeCardColor = Color(0xFF1D1E33);
-const inactiveCardColor = Color(0xFF111328);
 
 enum Gender { male, female }
 
@@ -38,6 +36,8 @@ class _InputPageState extends State<InputPage> {
   //   }
   // }
   Gender? gender;
+  int heigth = 180;
+  int weight = 60;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +46,7 @@ class _InputPageState extends State<InputPage> {
           title: Text('BMI CALCULATOR'),
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
                 child: Row(children: [
@@ -65,8 +66,8 @@ class _InputPageState extends State<InputPage> {
               Expanded(
                   child: ReusableCard(
                 onPress: () {
-                    setState(() {
-                      gender = Gender.female;
+                  setState(() {
+                    gender = Gender.female;
                   });
                 },
                 //ternary operation
@@ -82,13 +83,66 @@ class _InputPageState extends State<InputPage> {
                     onPress: () {},
                     color: activeCardColor,
                     cardChild: Column(
-                      children: [Text('HEIGHT')],
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('HEIGHT', style: labelTextStyle),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(heigth.toString(), style: NumberTextStyle),
+                            Text('cm', style: labelTextStyle)
+                          ],
+                        ),
+                        SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                            inactiveTrackColor: Color(0xFF8D8E98),
+                            activeTrackColor: Colors.white,
+                            thumbColor: Color(0xFFEB1555),
+                            overlayColor: Color(0x29EB1555),
+                            thumbShape:
+                                RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                            overlayShape:
+                                RoundSliderOverlayShape(overlayRadius: 30.0),
+                          ),
+                          child: Slider(
+                              value: heigth.toDouble(),
+                              min: 100.0,
+                              max: 250.0,
+                              onChanged: (double newValue) {
+                                setState(() {
+                                  heigth = newValue.round();
+                                });
+                              }),
+                        )
+                      ],
                     ))),
-            // Expanded(
-            //     child: Row(children: [
-            //   Expanded(child: ReusableCard(colour: activeCardColor)),
-            //   Expanded(child: ReusableCard(colour: activeCardColor))
-            // ])),
+            Expanded(
+                child: Row(children: [
+              Expanded(
+                  child: ReusableCard(
+                onPress: () {},
+                color: activeCardColor,
+                cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('WEIGHT', style: labelTextStyle),
+                      Text(weight.toString(), style: NumberTextStyle),
+                    ]),
+              )),
+              Expanded(
+                  child: ReusableCard(
+                color: activeCardColor,
+                onPress: () {},
+                cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('WEIGHT', style: labelTextStyle),
+                      Text(weight.toString(), style: NumberTextStyle),
+                    ]),
+              ))
+            ])),
             Container(
               color: Color(0xFFEB1555),
               margin: EdgeInsets.only(top: 10.0),
