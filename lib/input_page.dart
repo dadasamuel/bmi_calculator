@@ -38,118 +38,189 @@ class _InputPageState extends State<InputPage> {
   Gender? gender;
   int heigth = 180;
   int weight = 60;
+  int age = 60;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('BMI CALCULATOR'),
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-                child: Row(children: [
-              Expanded(
-                  child: ReusableCard(
-                      onPress: () {
-                        setState(() {
-                          gender = Gender.male;
-                        });
-                      },
-                      //ternary operation
-                      color: gender == Gender.male
-                          ? activeCardColor
-                          : inactiveCardColor,
-                      cardChild: IconContent(
-                          icon: FontAwesomeIcons.mars, label: 'MALE'))),
-              Expanded(
-                  child: ReusableCard(
-                onPress: () {
-                  setState(() {
-                    gender = Gender.female;
-                  });
-                },
-                //ternary operation
-                color: gender == Gender.female
-                    ? activeCardColor
-                    : inactiveCardColor,
-                cardChild:
-                    IconContent(icon: FontAwesomeIcons.venus, label: 'FEMALE'),
-              ))
-            ])),
+      appBar: AppBar(
+        title: Text('BMI CALCULATOR'),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+              child: Row(children: [
             Expanded(
                 child: ReusableCard(
-                    onPress: () {},
-                    color: activeCardColor,
-                    cardChild: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('HEIGHT', style: labelTextStyle),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.baseline,
-                          textBaseline: TextBaseline.alphabetic,
-                          children: [
-                            Text(heigth.toString(), style: NumberTextStyle),
-                            Text('cm', style: labelTextStyle)
-                          ],
+                    onPress: () {
+                      setState(() {
+                        gender = Gender.male;
+                      });
+                    },
+                    //ternary operation
+                    color: gender == Gender.male
+                        ? activeCardColor
+                        : inactiveCardColor,
+                    cardChild: IconContent(
+                        icon: FontAwesomeIcons.mars, label: 'MALE'))),
+            Expanded(
+                child: ReusableCard(
+              onPress: () {
+                setState(() {
+                  gender = Gender.female;
+                });
+              },
+              //ternary operation
+              color:
+                  gender == Gender.female ? activeCardColor : inactiveCardColor,
+              cardChild:
+                  IconContent(icon: FontAwesomeIcons.venus, label: 'FEMALE'),
+            ))
+          ])),
+          Expanded(
+              child: ReusableCard(
+                  onPress: () {},
+                  color: activeCardColor,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('HEIGHT', style: labelTextStyle),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text(heigth.toString(), style: NumberTextStyle),
+                          Text('cm', style: labelTextStyle)
+                        ],
+                      ),
+                      SliderTheme(
+                        data: SliderTheme.of(context).copyWith(
+                          inactiveTrackColor: Color(0xFF8D8E98),
+                          activeTrackColor: Colors.white,
+                          thumbColor: Color(0xFFEB1555),
+                          overlayColor: Color(0x29EB1555),
+                          thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                          overlayShape:
+                              RoundSliderOverlayShape(overlayRadius: 30.0),
                         ),
-                        SliderTheme(
-                          data: SliderTheme.of(context).copyWith(
-                            inactiveTrackColor: Color(0xFF8D8E98),
-                            activeTrackColor: Colors.white,
-                            thumbColor: Color(0xFFEB1555),
-                            overlayColor: Color(0x29EB1555),
-                            thumbShape:
-                                RoundSliderThumbShape(enabledThumbRadius: 15.0),
-                            overlayShape:
-                                RoundSliderOverlayShape(overlayRadius: 30.0),
-                          ),
-                          child: Slider(
-                              value: heigth.toDouble(),
-                              min: 100.0,
-                              max: 250.0,
-                              onChanged: (double newValue) {
-                                setState(() {
-                                  heigth = newValue.round();
-                                });
-                              }),
+                        child: Slider(
+                            value: heigth.toDouble(),
+                            min: 100.0,
+                            max: 250.0,
+                            onChanged: (double newValue) {
+                              setState(() {
+                                heigth = newValue.round();
+                              });
+                            }),
+                      )
+                    ],
+                  ))),
+          Expanded(
+              child: Row(children: [
+            Expanded(
+                child: ReusableCard(
+              onPress: () {},
+              color: activeCardColor,
+              cardChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('WEIGHT', style: labelTextStyle),
+                    Text(age.toString(), style: NumberTextStyle),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        CustomContainer(
+                          onTap: () {
+                            setState(() {
+                              age++;
+                            });
+                          },
+                          icon: Icons.add,
+                        ),
+                        CustomContainer(
+                          onTap: () {
+                            setState(() {
+                              age--;
+                            });
+                          },
+                          icon: Icons.remove,
                         )
                       ],
-                    ))),
+                    )
+                  ]),
+            )),
             Expanded(
-                child: Row(children: [
-              Expanded(
-                  child: ReusableCard(
-                onPress: () {},
-                color: activeCardColor,
-                cardChild: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('WEIGHT', style: labelTextStyle),
-                      Text(weight.toString(), style: NumberTextStyle),
-                    ]),
-              )),
-              Expanded(
-                  child: ReusableCard(
-                color: activeCardColor,
-                onPress: () {},
-                cardChild: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('WEIGHT', style: labelTextStyle),
-                      Text(weight.toString(), style: NumberTextStyle),
-                    ]),
-              ))
-            ])),
-            Container(
-              color: Color(0xFFEB1555),
-              margin: EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: 80.0,
-            )
-          ],
-        ));
+                child: ReusableCard(
+              color: activeCardColor,
+              onPress: () {},
+              cardChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('WEIGHT', style: labelTextStyle),
+                    Text(weight.toString(), style: NumberTextStyle),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        FloatingActionButton(
+                          backgroundColor: Colors.white,
+                          key: const ValueKey('one'),
+                          onPressed: () {
+                            setState(() {
+                              weight++;
+                            });
+                          },
+                          child: Icon(Icons.add),
+                        ),
+                        FloatingActionButton(
+                          backgroundColor: Colors.white,
+                          key: const ValueKey('two'),
+                          onPressed: () {
+                            setState(() {
+                              weight--;
+                            });
+                          },
+                          child: Icon(Icons.remove),
+                        ),
+                      ],
+                    )
+                  ]),
+            ))
+          ])),
+          Container(
+            color: Color(0xFFEB1555),
+            margin: EdgeInsets.only(top: 10.0),
+            width: double.infinity,
+            height: 80.0,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class CustomContainer extends StatelessWidget {
+  final void Function()? onTap;
+  final IconData icon;
+  const CustomContainer({super.key, required this.onTap, required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 50,
+        width: 50,
+        decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+        child: Center(
+          child: Icon(
+            icon,
+            color: Colors.black,
+          ),
+        ),
+      ),
+    );
   }
 }
