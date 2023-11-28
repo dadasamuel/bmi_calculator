@@ -50,9 +50,9 @@ class _InputPageState extends State<InputPage> {
               Expanded(
                   child: ReusableCard(
                       onPress: () {
-                        setState(() {
-                          gender = Gender.male;
-                        });
+                        // setState(() {
+                        //   gender = Gender.male;
+                        // });
                       },
                       //ternary operation
                       colour: gender == Gender.male
@@ -63,9 +63,9 @@ class _InputPageState extends State<InputPage> {
               Expanded(
                   child: ReusableCard(
                 onPress: () {
-                    setState(() {
-                      gender = Gender.female;
-                  });
+                  //   setState(() {
+                  //     gender = Gender.female;
+                  // });
                 },
                 //ternary operation
                 colour: gender == Gender.female
