@@ -1,28 +1,32 @@
 import 'package:flutter/material.dart';
 
 class ReusableCard extends StatelessWidget {
-  ReusableCard({required this.colour, required this.cardChild, required this.onPress});
+  const ReusableCard(
+      {super.key,
+      required this.color,
+      required this.cardChild,
+      required this.onPress});
 
-  final Color colour;
+  final Color color;
   final Widget cardChild;
-  final Function onPress;
+  final void Function()? onPress;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPress(),
+      onTap: onPress,
       child: Container(
-        child: cardChild,
-        margin: EdgeInsets.all(15.0),
+        margin: const EdgeInsets.all(15.0),
         decoration: BoxDecoration(
-            color: colour, borderRadius: BorderRadius.circular(10.0)),
+            color: color, borderRadius: BorderRadius.circular(10.0)),
+        child: cardChild,
       ),
     );
   }
 }
 
 class IconContent extends StatelessWidget {
-  IconContent({required this.icon, required this.label});
+  const IconContent({super.key, required this.icon, required this.label});
   final IconData icon;
   final String label;
 
@@ -30,10 +34,10 @@ class IconContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Icon(icon, size: 80.0),
-      SizedBox(height: 15.0),
+      const SizedBox(height: 15.0),
       Text(
-       label,
-        style: TextStyle(
+        label,
+        style: const TextStyle(
           fontSize: 18.0,
           color: Color(0xFF8D8E98),
         ),
