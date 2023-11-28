@@ -43,3 +43,28 @@ class IconContent extends StatelessWidget {
     ]);
   }
 }
+
+
+class CustomContainer extends StatelessWidget {
+  final void Function()? onTap;
+  final IconData icon;
+  const CustomContainer({super.key, required this.onTap, required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 50,
+        width: 50,
+        decoration: BoxDecoration(color: Color(0xFF4C4F5E), shape: BoxShape.circle),
+        child: Center(
+          child: Icon(
+            icon,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+}

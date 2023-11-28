@@ -37,8 +37,8 @@ class _InputPageState extends State<InputPage> {
   // }
   Gender? gender;
   int heigth = 180;
-  int weight = 60;
-  int age = 60;
+  int weight = 50;
+  int age = 25;
 
   @override
   Widget build(BuildContext context) {
@@ -128,25 +128,26 @@ class _InputPageState extends State<InputPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('WEIGHT', style: labelTextStyle),
-                    Text(age.toString(), style: NumberTextStyle),
+                    Text(weight.toString(), style: NumberTextStyle),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomContainer(
                           onTap: () {
                             setState(() {
-                              age++;
-                            });
-                          },
-                          icon: Icons.add,
-                        ),
-                        CustomContainer(
-                          onTap: () {
-                            setState(() {
-                              age--;
+                              weight--;
                             });
                           },
                           icon: Icons.remove,
+                        ),
+                        SizedBox(width: 20.0),
+                        CustomContainer(
+                          onTap: () {
+                            setState(() {
+                              weight++;
+                            });
+                          },
+                          icon: Icons.add,
                         )
                       ],
                     )
@@ -159,37 +160,38 @@ class _InputPageState extends State<InputPage> {
               cardChild: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('WEIGHT', style: labelTextStyle),
-                    Text(weight.toString(), style: NumberTextStyle),
+                    Text('AGE', style: labelTextStyle),
+                    Text(age.toString(), style: NumberTextStyle),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        FloatingActionButton(
-                          backgroundColor: Colors.white,
-                          key: const ValueKey('one'),
-                          onPressed: () {
+                        CustomContainer(
+                          onTap: () {
                             setState(() {
-                              weight++;
+                              age--;
                             });
                           },
-                          child: Icon(Icons.add),
+                          icon: Icons.remove,
                         ),
-                        FloatingActionButton(
-                          backgroundColor: Colors.white,
-                          key: const ValueKey('two'),
-                          onPressed: () {
+                         SizedBox(width: 20.0),
+                        CustomContainer(
+                          onTap: () {
                             setState(() {
-                              weight--;
+                              age++;
                             });
                           },
-                          child: Icon(Icons.remove),
-                        ),
+                          icon: Icons.add,
+                        )
                       ],
                     )
                   ]),
             ))
           ])),
           Container(
+            child: Center(
+              child: Text('CALCULATE',
+              style: labelTextStyle, ),
+            ),
             color: Color(0xFFEB1555),
             margin: EdgeInsets.only(top: 10.0),
             width: double.infinity,
@@ -201,26 +203,3 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
-class CustomContainer extends StatelessWidget {
-  final void Function()? onTap;
-  final IconData icon;
-  const CustomContainer({super.key, required this.onTap, required this.icon});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: 50,
-        width: 50,
-        decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-        child: Center(
-          child: Icon(
-            icon,
-            color: Colors.black,
-          ),
-        ),
-      ),
-    );
-  }
-}
