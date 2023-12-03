@@ -8,6 +8,7 @@ const labelTextStyle = TextStyle(
   color: Color(0xFF8D8E98),
 );
 
-const NumberTextStyle = TextStyle(
-  fontSize: 50.0, 
-  fontWeight: FontWeight.w900);
+const numberTextStyle = TextStyle(fontSize: 50.0, fontWeight: FontWeight.w900);
+
+const largeButtonTextStyle =
+    TextStyle(fontSize: 25.0, fontWeight: FontWeight.w900);

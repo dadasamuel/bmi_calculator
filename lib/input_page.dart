@@ -1,7 +1,10 @@
 import 'package:bmi_calculator/all_class.dart';
+import 'package:bmi_calculator/calculator_brain.dart';
 import 'package:bmi_calculator/constants.dart';
+import 'package:bmi_calculator/result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:bmi_calculator/result_page.dart';
 
 enum Gender { male, female }
 
@@ -91,7 +94,7 @@ class _InputPageState extends State<InputPage> {
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         textBaseline: TextBaseline.alphabetic,
                         children: [
-                          Text(heigth.toString(), style: NumberTextStyle),
+                          Text(heigth.toString(), style: numberTextStyle),
                           Text('cm', style: labelTextStyle)
                         ],
                       ),
@@ -128,7 +131,7 @@ class _InputPageState extends State<InputPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('WEIGHT', style: labelTextStyle),
-                    Text(weight.toString(), style: NumberTextStyle),
+                    Text(weight.toString(), style: numberTextStyle),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -161,9 +164,9 @@ class _InputPageState extends State<InputPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('AGE', style: labelTextStyle),
-                    Text(age.toString(), style: NumberTextStyle),
+                    Text(age.toString(), style: numberTextStyle),
                     Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomContainer(
                           onTap: () {
@@ -173,7 +176,7 @@ class _InputPageState extends State<InputPage> {
                           },
                           icon: Icons.remove,
                         ),
-                         SizedBox(width: 20.0),
+                        SizedBox(width: 20.0),
                         CustomContainer(
                           onTap: () {
                             setState(() {
@@ -187,19 +190,35 @@ class _InputPageState extends State<InputPage> {
                   ]),
             ))
           ])),
-          Container(
-            child: Center(
-              child: Text('CALCULATE',
-              style: labelTextStyle, ),
+          GestureDetector(
+            onTap: () {
+              CalculatorBrain calc =
+                  CalculatorBrain(height: heigth, weight: weight);
+
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ResultPage(
+                  bmiResult: calc.calculateBMI(),
+                  resultText: calc.getResult(),
+                  interpretation: calc.getInterpretation(),
+                );
+              }));
+            },
+            child: Container(
+              child: Center(
+                child: Text(
+                  'CALCULATE',
+                  style: largeButtonTextStyle,
+                ),
+              ),
+              color: Color(0xFFEB1555),
+              margin: EdgeInsets.only(top: 10.0),
+              padding: EdgeInsets.only(bottom: 20.0),
+              width: double.infinity,
+              height: 80.0,
             ),
-            color: Color(0xFFEB1555),
-            margin: EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: 80.0,
           )
         ],
       ),
     );
   }
 }
-
